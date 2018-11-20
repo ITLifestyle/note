@@ -1,0 +1,51 @@
+安装
+	下载msi文件
+
+使用
+	开启
+		mongod --dbpath <path>
+		mongod --storageEngine <engine> --dbpath <path>
+			engine : mmapv1
+
+	开启数据库
+		mongo
+
+	导入
+		mongoimport --db test --collection restaurants --drop --file primer-dataset.json
+
+	查询
+		db.<collectionName>.find(<condition]>)[.sort(<sortCondition>)][.pretty()];
+			condition
+				opera			语法
+				等于			{<key>:<value>}
+				小于 			{<key>:{$lt:<value>}}
+				大于 			{<key>:{$gt:<value>}}
+				小于等于		{<key>:{$lte:<value>}}
+				大于等于		{<key>:{$gte:<value>}}
+				不等于			{<key>:{$ne:<value>}}
+				and 			$and:[{key1:value1}, {key2:value2}] || {<key1>:<value1>, <key2>:<value>2}
+				or 				$or:[{key1:value1}, {key2:value2}]
+
+			sortCondtion
+				{<key>:[1|-1]} # 1升序 -1降序
+
+	更新
+		db.<collectionName>.update({<operaCondition>}, {$set:{key1:value2...}} [,multi: true|false]);
+			$set : 写上是改字段, 不写是该表
+			multi : 为true时表示改所有符合条件的行
+
+	删除documents
+		db.<collectionName>.remove({[removeCondtion]});
+
+	删除collection
+		db<collectionName>.drop();
+
+tools
+	adminMongo - 可视化工具
+		安装
+			https://blog.csdn.net/u012318074/article/details/77651767
+		docs
+			https://adminmongo.markmoffat.com/docs/#Installation
+
+note
+	-- 最好看一遍官方文档 (考虑到有新的东西)

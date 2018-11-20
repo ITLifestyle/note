@@ -1,0 +1,19 @@
+------ plan ------
+	at first, i will try to understand web service development.
+------ web servic 开发 ------
+	实现方式 : REST, SOAP
+	开放框架 : axis2, Apche cxf, JDK, xfire
+
+	spring支持rest
+
+	参考
+		https://www.cnblogs.com/firstdream/p/5575928.html
+		https://jersey.github.io/
+		https://blog.csdn.net/weixin_42193625/article/details/80447390?utm_source=blogxgwz3
+
+------ JNA ------
+
+------ web socket ------
+	dll, plc
+
+

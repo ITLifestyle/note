@@ -1,0 +1,152 @@
+-- 特点
+	-- 单线程
+	-- 非阻塞I/O
+	-- 事件驱动机制
+
+-- 特殊字段
+	1. __dirname : 文件所在的路径
+
+-- 特殊的文件与目录
+	1. node_modules
+	2. pacakge.json - 由于配置文件夹中的main文件, 默认为index.js
+		eg : {
+			"name": "testBar",
+			"version": "1.0.1",
+			"main" : "app.js"
+		}
+
+-- 特性
+	1. './'引用的是根目录下的文件, 不加"./"node_modules文件夹
+			var bar = require("bar"); 
+				那么Node.js将会去寻找node_modules目录下的bar文件夹中的index.js去执行。
+
+-- 模块讲解 : 
+	http
+		req
+			.url : 请求的地址
+
+	url
+		.parse() : 拆分url信息
+
+	fs - file system
+		改文件名
+			fs.rename(oldPaht, newPath, callback);
+
+	querystring
+
+	path
+		.mormalize() :
+
+-- 方法&函数
+	exports - 用于向外部js暴露内部方法与变量
+		eg ： exports.msg = msg;
+
+	module.exports -  向外暴露某个构造方法
+		eg : module.exports = People(args...);
+
+	js与js的合作模式
+		1. 某一个js文件, 提供函数
+		2. 某一个js文件, 描述一个类
+
+-- 请求
+	get : 
+
+	post :
+		原生
+			// 监听数据的传输, chunk为数据块
+			req.addListener("data", function (chunk) {})
+
+			// 监听数据传输完成
+			req.addListener("end", function () {})
+
+		formidable
+			form.parse (req, fields, files) {};
+
+-- 静态资源管理
+
+-- npm 
+	介绍 : 开发者社区, 可下载开发者写的module
+
+	命令
+		npm install [moduleName]
+		npm init
+
+-- 模板
+	1. 一个js文件是一个模块
+	2. 一些js文件组成广义上的模块
+
+-- 异步变成同步
+	递归调用
+		eg : (functio iterator(i){
+				...
+				fun(...,callbackFunction(){
+					iterator(i+1);
+				});
+			})(0);
+
+-- 模板引擎
+	ejs - npm第三方模板
+		原理 : 字符串处理
+		特点
+			效率不高
+			不支持继承
+
+	jade
+		特点
+			缩进表示嵌套
+			效率高
+
+	swig
+
+-- ajax请求数据
+
+-- notice
+	-- node没有web容器的概念
+	-- 顶层的路由设计 ./ 为了跨平台
+	-- node使用的是v8引擎
+	-- 模板引擎开始变得不流行了
+
+-- 适合开发的业务
+	-- 有大量i/o,且没有复杂的处理
+	-- 也适合与web socket, 开发长连接
+
+	!? : 适合任务调度, 不适合计算多的. 
+
+	eg : 
+		-- 用户表单收集
+		-- 考试系统
+		
+		-- 聊天室
+
+
+------ express ------
+	install : npm install --save
+
+	路由
+		app.get(<path>, fn);
+
+	RESTful路由设计 - 一般用在手机app上
+
+	中间件 - middleware
+		app.use([path], [function, ...] function)
+			path : 默认为"/", 匹配path及子path(子path = path + "otherPath")
+		next 参数 ： 让以匹配的路由继续去匹配
+
+	引用ejs Template 
+		app.set("view engine", "ejs");
+
+	设置模板页的位置，默认为项目路径下的'views'文件夹下
+		app.set("views", "fileName");
+
+	res.send(); 返回请求信息, 会自动设置mime类型
+		get请求
+			参数获取 : req.query返回参数列表
+		post请求
+			参数获取 : 使用body-parser模块用, req.body得到参数。但是如果表单中含有文件上传，那么还是需要使用formidable模块。
+				-- body-parser 可以作为一个轻量级的方案 
+
+
+	---- project ----
+		--- little abulm --- 
+			文件结构
+	

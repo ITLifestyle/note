@@ -1,0 +1,54 @@
+------ js复习 ------
+数据类型
+	Null
+		typeof null -> object
+	Undefined
+
+数据类型转换
+	数字 -> boolean
+		o,NaN为false,其他的为true
+	字符串 -> boolean
+		空字符为false,其他的为true
+	对象 -> booelan
+		null,undefine为false,其他的为true
+
+对象
+	内建对象 - es标准定义的对象
+	宿主对象 - 由js的运行环境提供的对象,常见的有浏览器
+		eg : console,document,Bom,Dom
+	自定义对象 - 开发人员创建的对象
+		创建对象
+			new ObjectName();
+			{} - 对象字面量
+		添加属性和方法
+			obejct.<attrName> = value;
+			object[<attrName>] = value; - attrName可以是任何的字符串,灵活,就想是键值对
+		获取属性值
+			object.<attrName>
+			object[<attrName>]
+		删除属性
+			delete obj.<attrName>
+	创建对象方式
+		直接声明
+		工厂 - 声明的对象都是object类型的
+		构造函数
+			eg : function Person(){}
+	原型对象(prototype) - 当函数以构造函数执行时,它所创建的每一个对象都含有一个隐藏的属性; 相当于java中的父类
+		查看
+			objName.__proto__
+			className.prototype
+
+运算符
+	in - 检测对象是否含有某一个属性; 对象中没有会去原型中找
+		"属性名" in obj
+		-- obj.hasOwnProperty("properName"); 仅仅检查对象不会检查原型中的属性是否存在 
+
+隐藏参数
+	this - 由浏览器创建
+		根据调用方式的不同,this的指向不一样
+
+
+------ ES6 ------
+
+
+------ ES7 ------

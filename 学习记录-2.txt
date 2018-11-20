@@ -1,0 +1,297 @@
+------ lucene -----
+	--term : term/token(语汇单元), 倒排序索引/反向索引结构(词汇早文档)
+	对原始文档提取单词、将字母转为小写、去除标点符号、去除停用词等过程生成最终的语汇单元，可以将语汇单元理解为一个一个的单词。
+
+	--建立索引
+
+		--- 类介绍 ---
+		分词器
+			StandardAnalyzer, SmartChineseAnalyzer, CJKAnalyzer, IkAnalyzer
+
+	--查询索引
+
+	--notice :
+		-- PointValues 取代了 NumericField, 因为PointValues 更快，更小，更便于资源的利用。所以，所有的 legacy**都被取代了。
+			-- 如果要存储，必须创建同名的 StoredField 类
+			-- 如果要排序使用，必须同时创建同名的 StoredField 类与 NumericDocValuesField 类
+
+	--??
+		BooleanQuery 查询中Occur.MUST, Occur.MUST, ... 是针对文件还是field
+
+------ solr ------
+	get请求查, post增删改
+
+	solrconfig中 solr.install.dir 为核的目录 (存放索引的目录)
+
+	数据导入
+	
+	查询
+
+	--- solrj ---
+
+------ mybatis ------
+	一级缓存 (一个sqlSessoion一个)
+		方法关闭一级缓存关闭(sqlSession关闭, 事务结束即为关闭)
+		默认开启 （spring中默认关闭）
+
+	二级缓存 (按namespace来划分)
+		开启
+			核心配置文件 : <settingname="cacheEnabled"value="true"/>
+			映射配置文件 : <cache />
+
+		禁用 ()
+			映射配置文件 : statement中 -> useCache="false"
+
+		刷新缓存
+			映射配置文件 : statement中 -> flushCache = true | false
+
+		* * *
+			pojo类最好实现序列化接口 (存储介质不一定导致)
+			sqlSession.close(); 后才会将数据写入缓存中
+
+	<cache />
+		type : 
+
+	--- ehcache ---
+		简介 : 分布式缓存框架 (redis, memcached......)
+
+		配置文件 : classPath下配置ehcache.xml
+
+		整合
+			point
+				-- jar : ehcache-core, ehcache-mybatis
+				-- 实现 Mybatis 提供的 Cache 接口
+
+	整合spring
+		point
+			bean : SqlSessionFactory, dataSource, mapper代理
+			jar : spring与maybatis核心包, myabtis-spring
+
+	* * *
+		细粒度缓存
+
+	? ? ?
+		ehcache的配置文件是默认去classPath下main找的吗
+
+------ idea使用技巧 ------
+	live template
+		设置 : setting -> live template
+
+	postfix
+		character : 不可添加
+		常用 :
+			attrName.null
+			attrName.field
+			intValue.fori
+
+	重构
+		变量 : shift + f6
+		方法 : ctrl + f6, enter + alt
+
+	抽取
+		普通变量 : alt + ctrl + V
+		静态变量 : alt + ctrl + C
+		全局变量 : alt + ctrl + f
+		参数抽取 : alt + ctrl + p
+		函数 : alt + ctrl + m
+
+	git 集成
+		查看某一行的信息 : 行数显示栏右键 -> annotate
+
+	local history : vcs -> local history
+
+	关联
+		spring 关联
+			查看spring的bean的分配等信息
+		关联数据库
+			会提示有关数据库操作的信息
+
+	断点调试
+		条件断点
+			-- 断点处使用ctrl shift f8
+			-- 右键断点的红点
+
+		表达式求值
+			alt f8
+
+		set value
+			debug窗口 -> 选中属性 -> f2
+
+		快捷键
+			Alt shift f9 : choose one function to run
+			ctrl shift f8 : show all breakpoints
+
+			shift f8 : step out
+			shift f9 : run
+			ctrl f8 : create a breakpoint
+			alt f9 : 跳到指定行
+			f7 : step into
+			f8 : step over
+			f9 : resume
+
+	文件操作
+		新建文件 Ctrl + Alt + Insert
+		复制文件 F5
+		移动文件 F6
+		复制文件名——对着文件 ： Ctrl+C
+		复制完整文件名——对着文件 ： shift+Ctrl+C
+		批量复制——调用剪切板 ： shift+Ctrl+V
+
+	结构图
+		ctrl f12 : 类的大纲
+		shift ctrl alt u : maven 依赖图
+		ctrl h : 类结构
+		ctrl alt h : 方法名上按可以查看该方法被谁调用
+
+------ 宜方商城 ------
+	soa : 面向服务的架构
+
+
+
+
+	工程架构分析
+		maven : 工程依赖管理, jar管理, 自动打包
+
+	debug
+		由于是分布式, 需要手动加源码
+
+	--- maven ---
+
+	--- zookeeper基本使用 (注册中心) ---
+		安装 - linux ： 见百度或者文档
+		操作 ： 
+
+	--- dubbo的使用 ---
+		发布服务
+			<!-- 和本地服务一样实现远程服务 -->
+			<bean id="xxxService" class="com.xxx.XxxServiceImpl" />
+			<!-- 增加暴露远程服务配置 -->
+			<dubbo:service interface="com.xxx.XxxService" ref="xxxService" />
+
+		调用服务
+			<!-- 增加引用远程服务配置 -->
+			<dubbo:reference id="xxxService" interface="com.xxx.XxxService" />
+			<!-- 和本地服务一样使用远程服务 -->
+			<bean id="xxxAction" class="com.xxx.XxxAction">
+				<property name="xxxService" ref="xxxService" />
+			</bean>
+
+		notice : 
+			dubbo 的约束要自己添加
+				xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+				http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+
+------ spring复习 ------
+	term 
+		反转控制 (IOC) : 
+		依赖注入 (DI) : 
+
+	spring el
+		#{ SpEL expression } | @value("#{ SpEL expression }")
+
+		. : 获取属性, 方法调用
+
+		运算符除了与(and), 或(or), 非(!)其他的与java一致
+
+		可有三元运算
+
+		可获取list和map中的元素, 且和java一致
+
+		正则表达式 : 
+			#{ "str" matches "regex" }
+		
+------ JUnit ------
+	其他注解
+		@Ignore
+		@RunWith : 可更改测试运行器
+
+ 	执行顺序
+ 		@BeforeClass
+ 		@Before
+ 		@Test
+ 		@After
+ 		@AfterClass
+
+ 	@Test(expected=CustomExceotion.class)
+ 	@Test(timeout=毫秒) : 可用来测试性能
+
+ 	测试套件 : 用于组织测试类一起运行
+ 		@RunWith(Suite.class)
+ 		@Suite.SuiteClasses({TestClass.class,...})
+ 		public class className {
+ 			// the class must is a empty class
+ 		}
+
+ 	参数化设置
+ 		@Parameters
+
+ 	spring与hibernate测试
+ 		
+
+ 	other
+ 		断言
+
+------ one day ------
+	-- bug
+		zkServer.sh:line 109
+		No bean named 'cacheManager' is defined
+
+	-- new find
+		mybatis视乎可以配置多个映射配置文件
+
+	-- task
+		-- 测试系统
+			测试数据
+				教师 : 20071058, 20101191, 20070496
+
+		task sort
+			添加班级			
+			添加教师
+			添加学生
+			添加课程
+			添加课程任务
+			添加课程计划
+			添加导员
+
+		记录
+			
+
+		??
+			--- 要导入的数据问题 ----
+				没有测试形式(考察, 考试), 考核形式(上机, 笔试), 考试时间, 成绩比例
+
+			--- 系统问题 ---
+				学生信息显示有问题 (没有组织及专业信息)
+				点名问题 (异常状态的的学生)
+				学分应该是浮点数据
+				课程计划的学期没有与学期表(term)关联起来
+				班级添加不了
+				没有分权限的模块 : 课程, 开课任务, 开课计划
+				班级统计查看 : 没有分权限(教师可以查看整个班级的出勤率), 缺少按学期/周统计 ，统计查询没有分专业
+				学生 ： 导员可以看其他导员所管理的班级的学生的信息
+				点名 ： 
+					同一个班级同一节课可以点名两次
+					进行考勤页在有默认班级的情况下, 不点击班级选择, 会提示没有选择班级
+				分页 : 部分模块的数据过多, 分页的选项过长
+				用户名下的下拉按钮无效
+
+
+		!!
+			培养方案表(culture)中有些字段不明白是否要用
+
+	-- term
+		装箱循环输送线
+		MES
+
+
+	/admin/specialDiscover/change
+	object.options[object.selectedIndex].text;
+	onkeyup="this.value=this.value.replace(/[\+\-\*/]/,'')"
+
+	
+	院系:国际学院 课程名称:软件工程 
+	考勤班级:软工1501B 考勤时间:${startDate} - 
+
+
+<!-- 数据源,事务,工厂,mybatis,基本包扫描 -->
+git@gitee.com:lyg1994/bankingstatistics.git

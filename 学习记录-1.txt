@@ -1,0 +1,413 @@
+------ freemaker ------
+	term : hashes,scalars,sequences,built-ins（内建函数）,missing variables,ftlh,ftlx,include,import
+
+	directives
+
+	operator
+		>, <, !=, ==, =, as, !, ??, \(转义字符), .., ..*, ..!, ..<, ?(内建函数)
+
+	especial operator characteries
+		r : the effect is like "@" in C#
+		?c :
+
+	语法 :
+		${} : 用于输出
+			eg : A. ${varName} ${varName.subVarName} ${varName.subVarName[index]}
+
+		<#list list as item></
+
+		<#if></
+
+		<#include "sourse path"/>
+
+	notice : 
+		上面的有限长度切分和无右边界切分都允许开始索引超过最后项 一个 
+
+
+
+
+------ git ------
+	term :
+		Working Directory ：
+		Repository :
+		stage :
+	instruction : (git + )
+		init
+		add	<file>
+		commit -m "message"
+
+		status
+		diff <file>
+
+		log [--pretty=oneline]
+		reset [--hard] HEAD/HEAD^/HEAD~n | commit id
+		reflog
+
+		checkout [--][filename]
+
+		rm <file>
+
+		--remote with github--
+		git remote add origin git@server-name:path/repo-name.git
+		git push origin master
+		git clon <url>
+
+	connecting github
+		ssh-keygen -t rsa -C "youremail@example.com"
+		git push -u origin master第一次推送master分支的所有内容；
+
+	notice :
+		--git reset命令既可以回退版本，也可以把暂存区的修改回退到工作区
+		--由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。
+
+
+
+
+
+
+
+------ maven ------
+三种厂库
+	本地仓库
+		添加 : <localRepository>filePath</localRepository>
+
+	远程仓库
+
+	中央仓库
+
+目录结构
+	src--main--java
+	 \		 \--resources
+	  \--test--java
+	  		 \resources
+
+常用命令 (mvn + )
+	tomcat:run
+	clear
+	compile
+	test
+	package --打包
+	install --把项目发布到本地仓库
+	site --生成一个项目说明
+	deploy --发布到私服
+
+maven生命周期
+	Clean
+		pre-clean
+		clean
+		post-clean
+	Default
+		compile, test, package, install, deploy
+	Site
+		site
+
+依赖范围
+	compile
+	provided	编译, 测试;运行, 打包
+	runtime		eg(数据库驱动包)	测试, 打包；编译, 运行
+	test 		测试;运行, 编译
+	
+	notice
+		依赖范围对依赖传递有影响
+
+生命周期与命令的关系
+	不同生命周期可以同时执行
+
+依赖版本冲突问题
+	调节原则
+		路径优先者原则 : 手动添加依赖
+		第一声明原则	: 
+	排除原则
+		<exclusions></
+	版本锁定
+		<dependencyManagement>
+			<dependecies>
+				<dependency>
+				</
+			</
+		</
+
+other tags
+	定义变量 : <properties><defineTagName>value</</
+		访问 : ${defineTagName}
+	定义子模板 : <modules><module></</
+
+私服(nexus)
+	使用
+		安装nexus(nexus .bat install) --> 启动(nexus.bat start) --> 登陆(admin : admin123) --> pom添加私服地址 --> maven文件配置访问私服账户 --> maven setting.xml配置profile(activeProfile激活profile)
+	仓库类型
+		virtual, proxy(代理仓库), hosted(宿主仓库), group
+	notice
+		分模块开发，一个模块改动后要将version改掉
+
+其他概念
+	版本锁定
+
+J 
+
+
+------ mybatis plus ------
+	--- rough learn by read reference ---
+	question
+	note
+		main classes :
+			AutoGenerator, GlobalConfig, DataSourceConfig(MySqlTypeConvert), StrategyConfig, PackageConfig, InjectionConfig(FileOutConfig), TemplateConfig
+
+	--- record ---
+	2018/7/18
+		--成功的按照官方文档做出了代码生成器，但使用的时候发现官方文档没有与发布的最新的jar包统一，因此在写进一步测试的时候会出现问题，以至于我没有进一步的动力去完成这一次测试。官方的问题在于：A.没有提供详细的api文档；B.官方文档与其发布的最新的jar包统一，并且没有说明。over
+		--明天我将尝试着用低版本的jar包做测试，高版本的暂时不考虑(官方没有说明，可能要发大量的时间)
+
+	2018/7/19
+		--使用老版本的jar包重新创建了相关的类，结果只有自定义的mapper方法可以用
+
+
+------ linux ------
+	远程控制工具
+
+	install jdk
+		sudo apt-get install python-software-properties
+			python-software-properties allows for easy management of your distribution and independent repositories
+			
+		sudo apt-add-repository ppa:webupd8team/java
+			 adds the personal package archive
+
+		sudo apt-get update
+		sudo apt-get install oracle-java8-installer
+
+	命令
+		ps -ef | grep redis
+
+		sudo iptables-save
+		sudo ufw enable
+		sudo ufw disable
+		sudo ufw enable | disable
+		sudo ufw status
+		sudo ufw allow [port]
+
+		** 开放22好端口 **
+		iptables -A INPUT -p tcp -i eth0 --dport [port] -j ACCEPT
+
+------ redis ------
+	scribution : Redis是一个开源，高级的键值存储和一个适用的解决方案，用于构建高性能，可扩展的Web应用程序。
+
+	描述 : 键值对数据库
+	数据类型
+		string
+			最多512M
+		hash
+		set
+		list
+		sortlist
+
+	key 要求 ：
+		 1, 不超过1024字节
+
+
+	应用 : 
+		缓存, 数据过期处理, 任务队列等
+
+	--- term ---
+		nil = null
+
+
+	--- redis命令集 ---
+		-- core --
+			redis_cli
+			redis-cli -h host -p port -a password
+		-- 服务器 --
+			flushdb
+			flushall
+			each content(向控制台输出一些东西)
+		-- config --
+			CONFIG GET CONFIG_SETTING_NAME
+			CONFIG SET CONFIG_SETTING_NAME NEW_CONFIG_VALUE	
+
+		-- data operation --
+			- string -
+			set attr_name attr_value
+			get attr_name
+			getset attrname value
+
+			incr attr_name (相当于++)
+			decr attr_name (相当于--)
+			incrby key numerical_value
+			decrby key numerical_value
+
+			append key string
+
+			- hash -
+			hmset ukey (attr_name attr_value)+
+			hmset key filed...
+			hset key field value
+			hget key field
+			hgetall key
+			hkeys
+
+			hdel key filed
+
+			hincryby key field increment_num
+
+			hexists key field
+
+			hlen key
+
+			- list -
+			lpush key value... (没有创建)
+			rpush key value
+			lrange attr_name start end
+			lpop key
+			rpop key 
+
+			lpushx key value (没有不创建)
+
+			lrem key count value (count为负值,从右往左 为零删除所有)
+
+			lset key index value (替换指定位置的元素)
+			linset key after || before  value1 value2
+			rpoplpush key1 key2(可以改)
+			
+			- set -(不允许出现重复元素，且无序)
+			sadd attr_name value...
+			smembers attr_name
+			srem key value
+
+			sismemeber key value
+
+			sinter key key2 (并集)
+			sdiff key1 key2 (key1中排除key2)
+			sunion key1 key2 ...
+
+			scard key
+			srandmember key
+			sdiffstore | sunionstore target key1 key2 ...(key1与key2比较后放入target中)
+
+			- sortedset -
+			zadd attrname power value
+			zrangebyscore attrname start end
+			zrem key value...
+			zrevrange key start end [withscores] [limit index count]
+			zrange key start end [withscores]
+			zsocre key value
+
+			zincrby key increment_score value
+			zount key min max
+			zrank key value
+			zrevrank key value
+
+			zcard key
+
+			zremrangebyrank key start end
+			...
+
+			- common operation - 
+			keys pattern (*, ?)
+			del attrname
+			exists key
+			rename key newkey
+			expire key (设置过期时间)
+			ttl jey (返回剩余时间,-1没有设置过期时间,-2key不存在)
+			type key
+
+	reids 特性
+		移库 : redis有16个库，0-15
+			move key index(库的索引)
+		select index
+
+	订阅
+		subscribe channel
+		psubscribe channel*
+		publish channel content
+
+	事务(与mysql中的事务不同)/批处理
+		multi		开启食物
+		exec		执行
+		discard		回滚
+
+	持久化
+		快照参数设置 (redis-conf)
+			save seconds times (至少做了times次修改, seconds秒后会修改)
+
+
+	--- redis in java ---
+		JedisPool
+			构造 : new JedisPool(jedisPoolConfig, url, port);
+			
+		JedisPoolConfig
+
+	--- java 中的应用 ---
+
+------ shiro ------
+	会话管理
+		相关类
+			SessionDao, SessionManager, AbstractSessionDAO, DefaultWebSessionManager, DefaultWebSecurityManager
+
+		编写
+			实现SessionDao
+			重写sessionManager
+
+		填充关系 : AbstractSessionDAO(Impl) > DefaultWebSessionManager(Impl) > DefaultWebSecurityManager
+
+		notice
+			会话管理中sessionID生成的后要绑定
+
+	缓存管理
+		相关接口 : CacheManager, Cache, DefaultWebSecurityManager
+		填充关系 : Cache(Impl) > CacheManager(Impl) > DefaultWebSecurityManager
+
+	自动登陆
+		相关类 : SimpleCookie, CookieRememberMeManager, DefaultWebSecurityManager
+		相关方法 : token.setRememberMe(boolean isRemember);
+		填充关系 : SimpleCookie > CookieRememberMeManager > DefaultWebSecurityManager
+
+	dk classs
+		WebSessionKey
+
+
+------ canvas ------
+	Canvas
+		js获取element可用的方法
+			width
+			height
+			getContext()
+	Context
+
+------ SLF4J -------
+	term
+		Simple Logging Facade for Java
+	依赖
+    	slf4j-api-1.8.0-alpha2.jar
+    	log4j-1.2.17.jar
+    	slf4j-log4j12-1.8.0-alpha2.jar(使用maven时使用这个就可以了)
+    使用
+    	-- log4j -- 
+    	配置log4j
+    	java使用
+
+------ 软件测试 -------
+	概要
+		软件测试的五大要素：质量、人员、资源、流程、技术
+		软件测试的两个目标：测试覆盖率、测试效率
+	工具
+		XUnit(JUnit, PHPUnit)
+	分类
+		阶段
+			单元测试 : 详细设计
+				原则
+					-- 尽可能保证各个测试用力相互独立
+					-- 由开发人员测试
+			集成测试 : 概要设计
+				方案
+					Big Bang		- 一次性整合
+					自顶向下			-	
+					自底向上		
+					核心系统集成		- 从底层模块开始集成
+					高频集成
+
+			系统测试 : 重点测试业务
+
+			验收测试 : 
+
+------ one day ------
+
+	shiro自定会话管理中自定义的SessionManager的类CustomSessionManager由于继承DefaultSessionManager所以导致retrieveSession获取不到SessionKey中的SessionId, 一直有错
