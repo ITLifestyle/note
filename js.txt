@@ -21,13 +21,13 @@
 			new ObjectName();
 			{} - 对象字面量
 		添加属性和方法
-			obejct.<attrName> = value;
-			object[<attrName>] = value; - attrName可以是任何的字符串,灵活,就想是键值对
+			obejct.<$attrName> = value;
+			object[<$attrName>] = value; - attrName可以是任何的字符串,灵活,就想是键值对
 		获取属性值
-			object.<attrName>
-			object[<attrName>]
+			object.<$attrName>
+			object[<$attrName>]
 		删除属性
-			delete obj.<attrName>
+			delete obj.<$attrName>
 	创建对象方式
 		直接声明
 		工厂 - 声明的对象都是object类型的
@@ -64,6 +64,12 @@
 		call() : 实参可以在对象后依次定义
 		apply() : 将实参封装到一个数组中统一传递
 
+继承写法
+	one
+		function User(name, pass) {}
+		function VipUser(name, pass, level){User.call(this.name,pass);this.level = level;}
+		VipUser.prototype = new User();
+		VipUser.prototype.constructor = VipUser();
 
 ------ ES6 ------
 变量
@@ -88,7 +94,7 @@
 		1. 箭头函数的this不能用call()或者apply()进行绑定
  		2. 箭头函数的 this 永远指向该函数构造时的环境
 
- 函数参数
+函数参数
  	扩展/展开
  		...args : 收集参数, 要放到参数列表的最后
  		...arr : 展开数组
@@ -105,4 +111,92 @@
 		let [a, b, c] = [1, 2, 3];
 		let [a, b, c] = {a:1, b:2, c:3}
 
+数组新增方法
+	map			映射
+	reduce		汇总
+	filter		过滤器
+	forEach		循环
+
+字符串
+	新方法
+		startsWith
+		endsWith
+	字符串模板
+		1. `template` - 反单引号包括字符串
+		2. ${varName} - 输出变量
+
+面向对象
+	写法
+		class <$className>{
+			constructor() {
+			}
+
+			<$functionName> () {
+			}
+		}
+	继承
+		class <$calssName> extends <$supClassName>{
+			constructor() {
+				super(); // 构造父类
+			}
+		}
+	应用 - React
+
+JSON
+	方法
+		stringify(<$jsonObject>); - json -> string
+		JSON.pase(<$str>);	- string -> json
+	简写
+		1. 名字和值一样的时候,可以指写一个
+		2. 方法简写为: <$functionName> () {};	
+
+promise - 可用于异步操作
+	方法
+		new Peomise(funciton (resolve, reject){});
+		peomise.then(function(){}, function(){});
+		Promise.all(<$promiseObjectArr>).then(function(){// 全成功执行}, function(){// 至少一个失败执行});
+		Promise.race(<$promiseObjectArr>);
+	eg :
+		let promise = new Promise(funciton (resolve, reject) {
+			$.ajax("/url",success(){resolve},error(){reject});
+		});
+		promise.then(function(){}, function(){});
+
+generator - 多次返回; 可用于处理异步
+	写法
+		function *<$name> () {
+			code...
+			yield [<$function>];
+			code...
+		}
+		let genObj = <$name>();
+		genObj.next();	// 执行一个yield;前的方法
+		genObj.next();	// 执行一个yield;后的方法
+	yield - 类似于一道工序
+		用法
+			yield $val;
+			let varName = yield $val;
+	场景
+		1. 异步请求数据
+	
+
 ------ ES7 ------
+数组
+	新增方法
+		includes
+		padStart
+		padEnd
+	新增语法
+		for...in
+		for...of
+
+async & await - 异步解决方案
+	eg
+		async function readData(){
+			let data1 = await $.ajax({url:"", dataType:"json"});
+			let data2 = await $.ajax({url:"", dataType:"json"});
+		}
+
+	说明
+		1. 只能用try..catch来捕获异常
+
