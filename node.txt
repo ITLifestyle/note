@@ -118,35 +118,69 @@
 		
 		-- 聊天室
 
+MD5
+
 
 ------ express ------
-	install : npm install --save
+install : npm install --save
 
-	路由
-		app.get(<path>, fn);
+路由
+	app.get(<path>, fn);
 
-	RESTful路由设计 - 一般用在手机app上
+RESTful路由设计 - 一般用在手机app上
 
-	中间件 - middleware
-		app.use([path], [function, ...] function)
-			path : 默认为"/", 匹配path及子path(子path = path + "otherPath")
-		next 参数 ： 让以匹配的路由继续去匹配
+中间件 - middleware
+	app.use([path], [function, ...] function)
+		path : 默认为"/", 匹配path及子path(子path = path + "otherPath")
+	next 参数 ： 让以匹配的路由继续去匹配
 
-	引用ejs Template 
-		app.set("view engine", "ejs");
+引用ejs Template 
+	app.set("view engine", "ejs");
 
-	设置模板页的位置，默认为项目路径下的'views'文件夹下
-		app.set("views", "fileName");
+设置模板页的位置，默认为项目路径下的'views'文件夹下
+	app.set("views", "fileName");
 
-	res.send(); 返回请求信息, 会自动设置mime类型
-		get请求
-			参数获取 : req.query返回参数列表
-		post请求
-			参数获取 : 使用body-parser模块用, req.body得到参数。但是如果表单中含有文件上传，那么还是需要使用formidable模块。
-				-- body-parser 可以作为一个轻量级的方案 
+res.send(); 返回请求信息, 会自动设置mime类型
+	get请求
+		参数获取 : req.query返回参数列表
+	post请求
+		参数获取 : 使用body-parser模块用, req.body得到参数。但是如果表单中含有文件上传，那么还是需要使用formidable模块。
+			-- body-parser 可以作为一个轻量级的方案 
 
+其他对象
+	cookie
+		使用
+			初始化
+				var express = require('express')
+				var cookieParser = require('cookie-parser')
+				var app = express()
+				app.use(cookieParser())
+			获取
+				req.cookies.$key
+			设置
+				res.cookie($key, $value, $config);
+		替代品 : localStorage
+	session
+		使用
+			初始化
+				var session = require('express-session')
+				app.use(session($config))
+					$config example :
+						{
+						  secret: 'keyboard cat',
+						  resave: false,
+						  saveUninitialized: true,
+						  cookie: { secure: true }
+						}
+			获取
+				req.session.$key
+			设置
+				req.session.$key = $value
 
-	---- project ----
-		--- little abulm --- 
-			文件结构
+MD5加密
+	
+
+---- project ----
+	--- little abulm --- 
+		文件结构
 	

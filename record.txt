@@ -1,11 +1,11 @@
--- 2018/11/05
-	查出一个结点及三级左右的关联的关系
-		方案
-			用sql一次性查出
-			一个sql只查一次, 多个方法查出数据
+-- 2018/11/23
+	留言本	
+		技术
+			后台 : node, express, formidable
+			前台 : underscore, bootstrap
 
-		select * from knowledge_relation kr
-		inner join structure_domain jd on kr.code = jd.previous
-
-		select * from structure_domain jd
-		where  jd.code in (select * from knowledge_relation kr where kr.previous = <$code>)
+		方法
+			controller
+				readAll
+				writeMsg
+				count

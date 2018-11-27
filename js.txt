@@ -197,6 +197,6 @@ async & await - 异步解决方案
 			let data2 = await $.ajax({url:"", dataType:"json"});
 		}
 
-	说明
+	说明	
 		1. 只能用try..catch来捕获异常
 
