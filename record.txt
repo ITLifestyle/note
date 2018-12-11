@@ -1,3 +1,16 @@
+-- 2018/11/5
+    <select id="selectInfos" resultType="com.easyteam.drivingschool.info.entity.Info">
+        select * from um_info
+        <where>
+            <if test="info.userName !=null and info.userName != ''">
+                and userName like '%${info.userName}%'
+            </if>
+        </where>
+    </select>
+
+    window.document.location.pathname
+
+
 -- 2018/11/27
 [error] Cannot resolve classpath entry: E:\IT\javaProject\_learn\mavenmybatisgeneratorsrc\main\resources
 <resources>
