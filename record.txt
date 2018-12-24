@@ -1,3 +1,15 @@
+-- 2018/12/23
+    AND cou.`code` = #{courseCode} AND cp.classes_code = #{classCode}
+
+-- 2018/12/21
+    [{'student':'12','sign':'1','status':'0','remark':'请假','created':'20180909'},{'student':'12','sign':'12','status':'1','remark':'迟到','created':'20180909'}]
+    
+    http://localhost:8080/backend/sign/service/dispose?signDetails=%5b%7b%27student%27%3a%2712%27%2c%27sign%27%3a%271%27%2c%27status%27%3a%270%27%2c%27remark%27%3a%27%e8%af%b7%e5%81%87%27%7d%2c%7b%27student%27%3a%2712%27%2c%27sign%27%3a%2712%27%2c%27status%27%3a%271%27%2c%27remark%27%3a%27%e8%bf%9f%e5%88%b0%27%7d%5d
+
+    %5b%7b%27student%27%3a%2712%27%2c%27sign%27%3a%271%27%2c%27status%27%3a%270%27%2c%27remark%27%3a%27%e8%af%b7%e5%81%87%27%7d%2c%7b%27student%27%3a%2712%27%2c%27sign%27%3a%2712%27%2c%27status%27%3a%271%27%2c%27remark%27%3a%27%e8%bf%9f%e5%88%b0%27%7d%5d
+
+    http://10.100.200.113:8080/smart/index/login
+
 -- 2018/11/5
     <select id="selectInfos" resultType="com.easyteam.drivingschool.info.entity.Info">
         select * from um_info
